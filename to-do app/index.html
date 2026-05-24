@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glass To-Do</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-gradient" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <h1>TaskNova</h1>
+        <p class="muted" id="counterText">Total: 0 • Completed: 0 • Pending: 0</p>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="toggle">
+        <input id="darkModeToggle" type="checkbox" />
+        <label for="darkModeToggle" class="toggle-label">
+          <span>Dark</span>
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card glass">
+      <div class="card-header">
+        <h2>Add a task</h2>
+        <div class="filters" role="tablist" aria-label="Task filters">
+          <button class="pill is-active" type="button" data-filter="all">All</button>
+          <button class="pill" type="button" data-filter="active">Active</button>
+          <button class="pill" type="button" data-filter="completed">Completed</button>
+        </div>
+      </div>
+
+      <form id="taskForm" class="add-form" autocomplete="off">
+        <label class="sr-only" for="taskInput">New task</label>
+        <div class="input-wrap">
+          <input
+            id="taskInput"
+            type="text"
+            placeholder="What needs to be done?"
+            maxlength="140"
+            required
+          />
+          <button id="addBtn" type="submit" aria-label="Add task">
+            <span class="icon">＋</span>
+            Add
+          </button>
+        </div>
+      </form>
+
+      <div class="tasks-grid">
+        <section class="task-section" aria-labelledby="pendingTitle">
+          <h3 id="pendingTitle" class="section-title">Pending</h3>
+          <ul id="pendingList" class="task-list" aria-live="polite"></ul>
+          <div class="empty" data-empty-for="pending">No pending tasks 🎯</div>
+        </section>
+
+        <section class="task-section" aria-labelledby="completedTitle">
+          <h3 id="completedTitle" class="section-title">Completed</h3>
+          <ul id="completedList" class="task-list" aria-live="polite"></ul>
+          <div class="empty" data-empty-for="completed">No completed tasks ✅</div>
+        </section>
+      </div>
+
+      <div class="footer-actions">
+        <button id="deleteAllBtn" class="btn danger" type="button">
+          Delete All
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <template id="taskTemplate">
+    <li class="task" data-task>
+      <button class="check" type="button" aria-label="Toggle complete" data-check>
+        <span class="check-icon" aria-hidden="true">✓</span>
+      </button>
+
+      <div class="task-content">
+        <span class="task-title" data-title>Task</span>
+        <input class="task-edit" type="text" data-edit-input hidden maxlength="140" />
+      </div>
+
+      <div class="task-actions">
+        <button class="icon-btn" type="button" aria-label="Edit task" data-edit>
+          ✎
+        </button>
+        <button class="icon-btn danger" type="button" aria-label="Delete task" data-delete>
+          🗑
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
+
